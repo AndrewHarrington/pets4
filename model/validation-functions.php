@@ -8,3 +8,7 @@ function validColor($color){
 function validString($string){
     return (($string != "") && ctype_alpha($string));
 }
+
+function validNum($num){
+    return ctype_digit($num) && $num > 0 && !empty($num);
+}

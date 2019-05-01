@@ -12,3 +12,20 @@ function validString($string){
 function validNum($num){
     return ctype_digit($num) && $num > 0 && !empty($num);
 }
+
+function validHabitat($habitat) {
+    global $f3;
+
+    // if there's no habitat
+    if(empty($habitat)) {
+        return false;
+    }
+
+    foreach($habitat as $habit) {
+        if(!in_array($habit, $f3->get('habitats'))) {
+            return false;
+        }
+    }
+
+    return true;
+}

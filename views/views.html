@@ -12,8 +12,12 @@
 <check if="{{ isset(@errors.animal)}}">
     <p>{{@errors.animal}}</p>
 </check>
+<check if="{{ isset(@errors.quan)}}">
+    <p>{{@errors.quan}}</p>
+</check>
 <form action="#" method="POST">
     <input type="text" id="name" name="name">
+    <input type="text" id="quantity" name="quantity">
     <button type="submit">Next</button>
 </form>
 </body>

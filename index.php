@@ -44,14 +44,26 @@ $f3->route("GET|POST /order", function($f3){
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
+        $valid = true;
         if(validString($_POST['name']))
         {
             $_SESSION['animal'] = $_POST['name'];
-            $f3->reroute("/order2");
         }
         else
         {
             $f3->set("errors['animal']", "Please enter an animal");
+            $valid = false;
+        }
+        if(validNum($_POST['quantity'])){
+            $_SESSION['quan'] = $_POST['quantity'];
+        }
+        else{
+            $f3->set("errors['quan']", "Please enter a valid quantity");
+            $valid = false;
+        }
+
+        if($valid){
+            $f3->reroute("/order2");
         }
     }
 

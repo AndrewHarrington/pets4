@@ -12,13 +12,32 @@
 <check if="{{ isset(@errors.color)}}">
     <p>{{@errors.color}}</p>
 </check>
+<check if="{{ isset(@errors.habitat)}}">
+    <p>{{@errors.habitat}}</p>
+</check>
+
 <form action="#" method="POST">
     <select name="color">
         <option value="none">--Select--</option>
         <repeat group="{{@colors}}" value="@colorOption">
-            <option>{{@colorOption}}</option>
+            <option
+            <check if="{{ @SESSION.color == @colorOption}}">
+                selected
+            </check>>
+            {{@colorOption}}</option>
         </repeat>
     </select>
+    <br>
+
+    <label>Habitat</label>
+    <br>
+    <repeat group="{{ @habitats }}" value="{{ @habitatOption }}">
+        <input type="checkbox" name="habitat[]" value="{{ @habitatOption }}"
+        <check if="{{ !empty(@SESSION.habitat) && in_array(@habitatOption, @_POST['habitat']) }}">
+            checked="checked"
+        </check>
+        >{{ @habitatOption }}<br>
+    </repeat>
     <button type="submit">Submit</button>
 </form>
 </body>

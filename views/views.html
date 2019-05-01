@@ -17,9 +17,9 @@
 </check>
 <form action="#" method="POST">
     <label for="name">Name: </label>
-    <input type="text" id="name" name="name">
+    <input type="text" id="name" name="name" value="{{ @SESSION.animal }}">
     <label for="quantity">Quantity: </label>
-    <input type="text" id="quantity" name="quantity">
+    <input type="text" id="quantity" name="quantity" value="{{ @SESSION.quan }}">
     <button type="submit">Next</button>
 </form>
 </body>

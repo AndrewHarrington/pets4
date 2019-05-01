@@ -12,6 +12,7 @@ require_once('vendor/autoload.php');
 $f3 = Base::instance();
 
 $f3->set('colors', array('pink', 'green', 'blue'));
+$f3->set('habitats', array('rock', 'land', 'tree', 'water'));
 
 require_once('model/validation-functions.php');
 
@@ -72,19 +73,34 @@ $f3->route("GET|POST /order", function($f3){
 });
 
 $f3->route("GET|POST /order2", function($f3){
-
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
+        $valid = true;
+
         if(validColor($_POST['color']))
         {
             $_SESSION['color'] = $_POST['color'];
-            $f3->reroute("/results");
         }
         else
         {
             $f3->set("errors['color']", "Please enter a color");
+            $valid = false;
+        }
+
+        if(!empty($_POST['habitat'])) {
+            $_SESSION['habitat'] = implode(', ', $_POST['habitat']);
+        }
+        else {
+            $f3->set("errors['habitat']", "Please check a habitat");
+            $valid = false;
+        }
+
+        if($valid){
+            $f3->reroute("/results");
         }
     }
+
+
 
 
     $view = new Template();
